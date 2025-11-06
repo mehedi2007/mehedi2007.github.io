@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HSC 27 - ACS Courses</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg,#071229,#0b162c);
+      color:#f0f4f8;
+      padding:20px;
+    }
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:30px;
+    }
+    .logo{
+      font-size:24px;
+      font-weight:700;
+      background:linear-gradient(90deg,#06b6d4,#7c3aed);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    nav a{
+      margin-left:15px;
+      color:#cbd5e1;
+      text-decoration:none;
+      font-weight:500;
+    }
+    nav a:hover{color:#06b6d4}
+    .hero{
+      text-align:center;
+      margin-bottom:40px;
+    }
+    .hero h1{
+      font-size:32px;
+      margin-bottom:10px;
+      background:linear-gradient(90deg,#06b6d4,#7c3aed);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .hero p{color:#94a3b8;}
+    .search{
+      margin:30px auto;
+      max-width:500px;
+      display:flex;
+    }
+    .search input{
+      flex:1;
+      padding:12px 15px;
+      border-radius:10px 0 0 10px;
+      border:none;
+      outline:none;
+      font-size:15px;
+    }
+    .search button{
+      background:#06b6d4;
+      border:none;
+      padding:12px 18px;
+      color:#fff;
+      border-radius:0 10px 10px 0;
+      cursor:pointer;
+      font-weight:600;
+    }
+    .filters{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:10px;
+      margin-bottom:25px;
+    }
+    .chip{
+      padding:8px 14px;
+      border-radius:50px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.05);
+      cursor:pointer;
+      color:#94a3b8;
+      transition:0.2s;
+    }
+    .chip.active{
+      background:linear-gradient(90deg,#06b6d4,#7c3aed);
+      color:#021024;
+      font-weight:700;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+    }
+    .card{
+      background:rgba(255,255,255,0.04);
+      border-radius:12px;
+      padding:15px;
+      border:1px solid rgba(255,255,255,0.08);
+      transition:transform 0.2s;
+    }
+    .card:hover{transform:translateY(-5px)}
+    .thumb{
+      height:160px;
+      border-radius:10px;
+      overflow:hidden;
+      margin-bottom:10px;
+    }
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:10px;
+      transition:0.3s;
+    }
+    .thumb img:hover{transform:scale(1.05);}
+    .title{font-size:16px;font-weight:600;margin-bottom:5px}
+    .subject{font-size:14px;color:#94a3b8;margin-bottom:10px}
+    .link-btn{
+      display:inline-block;
+      background:linear-gradient(90deg,#06b6d4,#7c3aed);
+      color:#021024;
+      text-decoration:none;
+      padding:8px 12px;
+      border-radius:8px;
+      font-weight:600;
+    }
+
+    /* Contact Section */
+    .contact{
+      margin-top:60px;
+      text-align:center;
+      background:rgba(255,255,255,0.03);
+      border-radius:14px;
+      padding:30px;
+      border:1px solid rgba(255,255,255,0.06);
+    }
+    .contact h2{
+      background:linear-gradient(90deg,#06b6d4,#7c3aed);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      margin-bottom:15px;
+    }
+    .contact a{
+      display:block;
+      color:#cbd5e1;
+      margin:8px 0;
+      text-decoration:none;
+      font-size:15px;
+      transition:0.2s;
+    }
+    .contact a:hover{color:#06b6d4}
+
+    footer{text-align:center;margin-top:30px;color:#64748b;font-size:13px}
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">HSC 27</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Subjects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>ACS HSC 27 Academic Cycles (Free)</h1>
+    <p>Science all subject — সবকিছু একসাথে এক ওয়েবসাইটে!</p>
+  </section>
+
+  <div class="search">
+    <input type="text" id="searchInput" placeholder="Search video...">
+    <button onclick="searchVideos()">Search</button>
+  </div>
+
+  <div class="filters" id="filterButtons">
+    <div class="chip active" onclick="filterSubject('all')">All</div>
+    <div class="chip" onclick="filterSubject('Math')">Math</div>
+    <div class="chip" onclick="filterSubject('Physics')">Physics</div>
+    <div class="chip" onclick="filterSubject('Chemistry')">Chemistry</div>
+    <div class="chip" onclick="filterSubject('Biology')">Biology</div>
+    <div class="chip" onclick="filterSubject('ICT')">ICT</div>
+  </div>
+
+  <div class="grid" id="videoGrid"></div>
+
+  <section class="contact" id="contact">
+    <h2>📞 Contact Me</h2>
+    <a href="https://www.facebook.com/mehedi.2007.bd" target="_blank">📘 Facebook: facebook.com/mehedi.2007.bd</a>
+    <a href="https://wa.me/qr/WRHMLMCWEFQ3E1" target="_blank">💬 WhatsApp: wa.me/qr/WRHMLMCWEFQ3E1</a>
+    <a href="mailto:mehedi.2007.bd@gmail.com">📧 Gmail: mehedi.2007.bd@gmail.com</a>
+  </section>
+
+  <footer>
+    © 2025 HSC 27 — Developed by It’z Mehedi ❤️
+  </footer>
+
+  <script>
+    const courses = [
+      {
+       
+        title: "PHYSICS  CAYCEL 01",
+        subject: "Physics",
+        thumb: "https://i.postimg.cc/kgD4GMCv/IMG-20251107-004050-577.jpg",
+        drive: "https://drive.google.com/drive/folders/11ML6Wxx34_z5nVwOA_t8R7E2X3agCcci"
+      }
+    ];
+
+    function renderVideos(list){
+      const grid = document.getElementById('videoGrid');
+      grid.innerHTML = '';
+      if(list.length === 0){
+        grid.innerHTML = '<p style=\"text-align:center;color:#94a3b8;\">No videos found 😢</p>';
+        return;
+      }
+      list.forEach(v=>{
+        grid.innerHTML += `
+          <div class='card'>
+            <div class='thumb'><img src='${v.thumb}' alt='${v.title}'></div>
+            <div class='title'>${v.title}</div>
+            <div class='subject'>${v.subject}</div>
+            <a href='${v.drive}' target='_blank' class='link-btn'>Watch on Drive</a>
+          </div>
+        `;
+      });
+    }
+
+    function filterSubject(sub){
+      document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+      event.target.classList.add('active');
+      if(sub === 'all') renderVideos(courses);
+      else renderVideos(courses.filter(v=>v.subject === sub));
+    }
+
+    function searchVideos(){
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      const result = courses.filter(v=>v.title.toLowerCase().includes(q));
+      renderVideos(result);
+    }
+
+    renderVideos(courses);
+  </script>
+
+</body>
+</html>
